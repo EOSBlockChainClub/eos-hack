@@ -281,7 +281,7 @@ app.post('/getItemAverageRating', function (req, res) {
    //   response.on('data', function (chunk) {
    //     console.log('BODY: ' + chunk);
    //     var jsonRes = JSON.parse(JSON.stringify(chunk));
-       res.end({rating: 6.5});
+       res.end({rating: 4.5});
    //     // res.send({
    //     //   date: "10th June 2018",
    //     //   rating: 8.0,
@@ -338,7 +338,7 @@ app.post('/listOfUserReview', function (req, res) {
    //   response.on('data', function (chunk) {
    //     console.log('BODY: ' + chunk);
    //     var jsonRes = JSON.parse(JSON.stringify(chunk));
-       res.end([{ rate: 6.5, comment: "Good", Date: "4th Jan 2017"}, { rate: 8.5, comment: "Good", Date: "4th May 2017"}, { rate: 5.5, comment: "Meh", Date: "13th Feb 2018"}]);
+       res.end([{ rate: 3.5, comment: "Good", Date: "4th Jan 2017"}, { rate: 4.5, comment: "Good", Date: "4th May 2017"}, { rate: 2.5, comment: "Meh", Date: "13th Feb 2018"}]);
    //     // res.send({
    //     //   date: "10th June 2018",
    //     //   rating: 8.0,

@@ -1,15 +1,23 @@
 var express = require('express');
 var request = require('request');
 var bodyParser = require('body-parser');
+var multer = require('multer'); // v1.0.5
+var upload = multer(); // for parsing multipart/form-data
 var app = express();
 
 // parse application/json
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.use(express.urlencoded());
+// app.use(express.json());
 
 const hostname = '0.0.0.0';
 const port = 9001;
+
+// EOS basic config
 // eos host
+// EOS Host: http://10.101.2.135:8888/
 const eoshost = 'https://10.101.2.135:8888';
 
 Eos = require('eosjs') // Eos = require('./src')
@@ -23,7 +31,7 @@ config = {
   chainId: null, // 32 byte (64 char) hex string
   keyProvider: prikey, // WIF string or array of keys..
   httpEndpoint: eoshost,
-  mockTransactions: () => 'pass', // or 'fail'
+  // mockTransactions: () => 'pass', // or 'fail'
   transactionHeaders: (expireInSeconds, callback) => {
     callback(null/*error*/, headers)
   },
@@ -35,8 +43,8 @@ config = {
 
 eos = Eos(config)
 
+// ROUTES
 // client ip : 10.101.1.178:63342/EOShackathon/index.html
-// EOS Host: http://10.101.2.135:8888/
 
 // for testing frontend
 app.get('/get_info', function (req, res) {
@@ -60,7 +68,6 @@ app.get('/get_info', function (req, res) {
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
       res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
       res.setHeader('Access-Control-Allow-Credentials', true);
-      // res.setEncoding('utf8');
       response.on('data', function (chunk) {
         console.log('BODY: ' + chunk);
         res.end(chunk);
@@ -68,7 +75,7 @@ app.get('/get_info', function (req, res) {
     })
 });
 
-// This responds with "Hello World" on the homepage
+// This responds with account info json on the homepage
 app.get('/profile', function (req, res) {
    console.log("**** GET request for get account ****");
    console.log("Get Account info");
@@ -95,17 +102,15 @@ app.get('/profile', function (req, res) {
     })
 });
 
-app.post('/verification', function (req, res) {
-   console.log("**** POST request for the homepage ****");
-   res.send('POST');
-   // post a request to EOS host
-   // return value (EOS) -> return value -> web client
-
-});
-
-
+// client can make review by posting product id and user id
 app.post('/makeReview', function (req, res) {
-   console.log("**** POST request for the homepage ****");
+   console.log("**** POST request for the make review ****");
+   // var jsondata = JSON.parse(JSON.stringify(req.params));
+   console.log(req.body);
+   var uid = req.body.userid;
+   var pid = req.productid;
+   console.log(String(uid)+':'+pid);
+
    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -119,9 +124,14 @@ app.post('/makeReview', function (req, res) {
 
 });
 
-
+// user can get review by user id and product id
 app.post('/getReviewById', function (req, res) {
-   console.log("**** POST request for the homepage ****");
+   console.log("**** POST request for the get review ****");
+   var jsondata = JSON.parse(JSON.stringify(req.body));
+   var userid =  jsondata.user.id;
+   var productid = jsondata.product.id;
+
+
    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -138,7 +148,7 @@ app.post('/getReviewById', function (req, res) {
 
 });
 
-
+// testing function for communicating with EOS cpp side
 app.get('/get', function (req, res) {
   console.log("**** Make transaction ****");
   var transactionPromise =  eos.transaction({
@@ -155,7 +165,8 @@ app.get('/get', function (req, res) {
                                           }
                                         }
                                       ]
-                                    });
+                                    }, res => { console.log(res); });//.then(res => { console.log(res) })
+                                    //.catch(e => { console.log(e); });
   console.log(String(transactionPromise));
   transactionPromise.then(
     // Log the fulfillment value

@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer'); // v1.0.5
 var upload = multer(); // for parsing multipart/form-data
 var app = express();
+const util = require('util');
 
 // parse application/json
 app.use(bodyParser.json());
@@ -18,7 +19,7 @@ const port = 9001;
 // EOS basic config
 // eos host
 // EOS Host: http://10.101.2.135:8888/
-const eoshost = 'https://10.101.2.135:8888';
+const eoshost = 'http://10.101.2.135:8888';
 
 Eos = require('eosjs') // Eos = require('./src')
 
@@ -32,9 +33,9 @@ config = {
   keyProvider: prikey, // WIF string or array of keys..
   httpEndpoint: eoshost,
   // mockTransactions: () => 'pass', // or 'fail'
-  transactionHeaders: (expireInSeconds, callback) => {
-    callback(null/*error*/, headers)
-  },
+  // transactionHeaders: (expireInSeconds, callback) => {
+  //   callback(null/*error*/, headers)
+  // },
   expireInSeconds: 60,
   broadcast: true,
   debug: false, // API and transactions
@@ -105,20 +106,47 @@ app.get('/profile', function (req, res) {
 // client can make review by posting product id and user id
 app.post('/makeReview', function (req, res) {
    console.log("**** POST request for the make review ****");
-   // var jsondata = JSON.parse(JSON.stringify(req.params));
-   console.log(req.body);
-   var uid = req.body.userid;
-   var pid = req.productid;
-   console.log(String(uid)+':'+pid);
 
    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
    res.setHeader('Access-Control-Allow-Credentials', true);
 
-   res.send({
-     status: 200
+   console.log("**** Make transaction ****");
+   var transactionPromise =  eos.transaction({
+                                       actions: [
+                                         {
+                                           account: 'hello.code',
+                                           name: 'hi',
+                                           authorization: [{
+                                             actor: 'tester',
+                                             permission: 'active'
+                                           }],
+                                           data: {
+                                             user: 'tester'
+                                           }
+                                         }
+                                       ]
+                                     });
+                                     // , res => { console.log(res); });//.then(res => { console.log(res) })
+                                     //.catch(e => { console.log(e); });
+   transactionPromise.then(
+     // Log the fulfillment value
+     function(val) {
+         console.log(val);
+         res.send({ status: "successful"});
+   }).catch(
+     // Log the rejection reason
+    (reason) => {
+         console.log('Handle rejected promise ('+reason+') here.');
+         res.send({ status: "failed"});
    });
+
+   // res.send({
+   //   status: 200
+   // });
+
+   res.send(util.inspect(req.body));
    // post a request to EOS host
    // return value (EOS) -> return value -> web client
 
@@ -131,18 +159,50 @@ app.post('/getReviewById', function (req, res) {
    var userid =  jsondata.user.id;
    var productid = jsondata.product.id;
 
+   var postTableData = {
+    "json": { "type": "bool", "default": false},
+    "table_key": "string",
+    "scope": "name",
+    "code": "name",
+    "table": "name",
+    "lower_bound": {"type": "uint64", "default": "0"},
+    "upper_bound": {"type": "uint64", "default": "-1"},
+    "limit": {"type": "uint32", "default": "10"}
+  }
+
 
    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
    res.setHeader('Access-Control-Allow-Credentials', true);
 
-   res.send({
-     date: "10th June 2018",
-     rating: 8.0,
-     received: 5.5,
-     currency: "usd"
-   });
+   request
+   .post(
+     { url: 'https://10.101.2.135:8888/v1/chain/get_table_rows',
+       json: postTableData
+     })
+   .on('response', function(response) {
+     console.log('    Response code: ' + response.statusCode) // 200
+     console.log('    Response content type: ' + response.headers['content-type']) // 'image/png'
+     console.log('    Response body: ' + JSON.stringify(response));
+     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+     res.setHeader('Access-Control-Allow-Credentials', true);
+     response.on('data', function (chunk) {
+       console.log('BODY: ' + chunk);
+       var jsonRes = JSON.parse(JSON.stringify(chunk));
+       res.end(jsonRes.doc);
+       // res.send({
+       //   date: "10th June 2018",
+       //   rating: 8.0,
+       //   received: 5.5,
+       //   currency: "usd"
+       // });
+     });
+   })
+
+
    // post a request to EOS host
    // return value (EOS) -> return value -> web client
 
@@ -179,6 +239,118 @@ app.get('/get', function (req, res) {
         console.log('Handle rejected promise ('+reason+') here.');
         res.send(reason);
   });
+
+});
+
+
+// user can get item average rating by product id
+app.post('/getItemAverageRating', function (req, res) {
+   console.log("**** POST request for the get review ****");
+   var jsondata = JSON.parse(JSON.stringify(req.body));
+   var productid = jsondata.product.id;
+
+   var postTableData = {
+    "json": { "type": "bool", "default": false},
+    "table_key": "string",
+    "scope": "name",
+    "code": "name",
+    "table": "name",
+    "lower_bound": {"type": "uint64", "default": "0"},
+    "upper_bound": {"type": "uint64", "default": "-1"},
+    "limit": {"type": "uint32", "default": "10"}
+  }
+
+   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+   res.setHeader('Access-Control-Allow-Credentials', true);
+
+   // request
+   // .post(
+   //   { url: 'https://10.101.2.135:8888/v1/chain/get_table_rows',
+   //     json: postTableData
+   //   })
+   // .on('response', function(response) {
+   //   console.log('    Response code: ' + response.statusCode) // 200
+   //   console.log('    Response content type: ' + response.headers['content-type']) // 'image/png'
+   //   console.log('    Response body: ' + JSON.stringify(response));
+     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+     res.setHeader('Access-Control-Allow-Credentials', true);
+   //   response.on('data', function (chunk) {
+   //     console.log('BODY: ' + chunk);
+   //     var jsonRes = JSON.parse(JSON.stringify(chunk));
+       res.end({rating: 6.5});
+   //     // res.send({
+   //     //   date: "10th June 2018",
+   //     //   rating: 8.0,
+   //     //   received: 5.5,
+   //     //   currency: "usd"
+   //     // });
+   //   });
+   // })
+
+
+   // post a request to EOS host
+   // return value (EOS) -> return value -> web client
+
+});
+
+
+// user can get all review product id
+app.post('/listOfUserReview', function (req, res) {
+   console.log("**** POST request for the get review ****");
+   var jsondata = JSON.parse(JSON.stringify(req.body));
+   var userid =  jsondata.user.id;
+   var productid = jsondata.product.id;
+
+   var postTableData = {
+    "json": { "type": "bool", "default": false},
+    "table_key": "string",
+    "scope": "name",
+    "code": "name",
+    "table": "name",
+    "lower_bound": {"type": "uint64", "default": "0"},
+    "upper_bound": {"type": "uint64", "default": "-1"},
+    "limit": {"type": "uint32", "default": "10"}
+  }
+
+
+   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+   res.setHeader('Access-Control-Allow-Credentials', true);
+
+   // request
+   // .post(
+   //   { url: 'https://10.101.2.135:8888/v1/chain/get_table_rows',
+   //     json: postTableData
+   //   })
+   // .on('response', function(response) {
+   //   console.log('    Response code: ' + response.statusCode) // 200
+   //   console.log('    Response content type: ' + response.headers['content-type']) // 'image/png'
+   //   console.log('    Response body: ' + JSON.stringify(response));
+     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+     res.setHeader('Access-Control-Allow-Credentials', true);
+   //   response.on('data', function (chunk) {
+   //     console.log('BODY: ' + chunk);
+   //     var jsonRes = JSON.parse(JSON.stringify(chunk));
+       res.end([{ rate: 6.5, comment: "Good", Date: "4th Jan 2017"}, { rate: 8.5, comment: "Good", Date: "4th May 2017"}, { rate: 5.5, comment: "Meh", Date: "13th Feb 2018"}]);
+   //     // res.send({
+   //     //   date: "10th June 2018",
+   //     //   rating: 8.0,
+   //     //   received: 5.5,
+   //     //   currency: "usd"
+   //     // });
+   //   });
+   // })
+// return [{ rate: 8.5, comment: "Good", Date: "4th May 2017"}, { rate: 8.5, comment: "Good", Date: "4th May 2017"}, { rate: 8.5, comment: "Good", Date: "4th May 2017"}];
+
+   // post a request to EOS host
+   // return value (EOS) -> return value -> web client
 
 });
 

@@ -138,22 +138,27 @@ optionalZipCountries = ["MO","HK"];
 
       var comment =document.getElementById("comment").value;
 
-      var json = '{ "userid": "123", "productid": "456", "rating": "' + rating + '", "comment": ' + comment + ' }';
+      var json = JSON.stringify({
+        userid: "123",
+        productid: "456",
+        rating: rating,
+        comment: comment
+      })
 
         var xmlhttp = new XMLHttpRequest();
         var url = "http://10.101.1.167:9001/makeReview";
 
-        //xmlhttp.open("POST", url, true);
-        xmlhttp.open("GET", "http://10.101.1.167:9001/get_info", true);
+        xmlhttp.open("POST", url, true);
+        // xmlhttp.open("GET", "http://10.101.1.167:9001/get_info", true);
 
-        xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
 
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
             }
         };
-        //xmlhttp.send(JSON.stringify(json));
-        xmlhttp.send();
+        xmlhttp.send(json);
+        // xmlhttp.send();
         //MyFunction();
 
 

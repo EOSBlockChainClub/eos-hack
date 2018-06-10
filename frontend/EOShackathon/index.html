@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DRate</title>
+    <link href="ui/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="ui/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css'>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Rating, Review system, blockchain" />
+
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/move-top.js"></script>
+    <script type="text/javascript" src="js/easing.js"></script>
+    <!-- slide -->
+    <style>
+        #appName{
+            display: inline-block;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-size: 2em;
+            margin-left: 3em;
+            margin-right: 3em;
+            vertical-align: middle;
+        }
+    </style>
+
+    <script>
+
+        var xmlhttp = new XMLHttpRequest();
+        var url = "http://10.101.1.167:9001/get_info";
+
+        xmlhttp.onreadystatechange = function() {
+            //if (this.readyState == 4 && this.status == 200) {
+
+                var myArr = JSON.parse(this.responseText);
+                // var myArr = this.responseText;
+                console.log(myArr);
+                myFunction(myArr);
+            //}
+            //console.log(this.status);
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+
+
+        var xmlhttp = new XMLHttpRequest();
+        var url = "http://10.101.1.167:9001/makeReview";
+
+        //xmlhttp.open("POST", url, true);
+        xmlhttp.open("GET", "http://10.101.1.167:9001/get_info", true);
+        
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            }
+        };
+        //xmlhttp.send(JSON.stringify(json));
+        xmlhttp.send();
+        //MyFunction();
+
+        function myFunction(arr) {
+            //var out = "";
+            //var i;
+            //for(i = 0; i < arr.length; i++) {
+            //    out += '<a href="' + arr[i].url + '">' +
+            //    arr[i].display + '</a><br>';
+            //}
+            document.getElementById("date").innerHTML = arr;
+        }
+    </script>
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="container">
+        <div class="logo">
+            <span class="menuicon"><img src="ui/images/menu.svg" style="vertical-align:middle" width="35px" alt="Menu"> </span>
+
+            <p id="appName">DRate</p><span class="transfericon"><img src="ui/images/moneyicon.jpg"  style="vertical-align:middle"
+                                                                                                                    width="40px" alt="Transfer to Bank"> </span>
+        </div>
+        <div class="top-nav">
+
+            &nbsp;
+
+            <ul >
+                <li class="active"><a href="index.html" >Home</a></li>
+                <li><a href="htmlFile/profile.html" >Profile</a></li>
+                <li><a href="htmlFile/logout.html" >Logout</a></li>
+            </ul>
+            <!--script-->
+            <script>
+					$("span.menuicon").click(function(){
+						$(".top-nav ul").slideToggle(500, function(){
+						});
+					});
+			</script>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!---->
+<div class="banner banner-in">
+    <div class="container">
+        <div class="col-md-6 banner-matter-in">
+            <img src="ui/images/usericon.png" width="60px"/>
+            <h1 style="display:inline-block;padding-left:2rem;padding-bottom:0;font-size:3rem;">Chan Tai Man
+            <br/>Wallet: $350</h1>
+        </div>
+        <div class="col-md-6 banner-side side-banner">
+            <div class="col-md-6 side">
+                <!--<img class="img-responsive" src="/ui/images/se1.jpg" alt="">-->
+            </div>
+            <div class="col-md-6 side">
+                <!--<img class="img-responsive" src="/ui/images/se.jpg" alt="">-->
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!---->
+<div class="content">
+    <div class="container">
+        <div class="service-top">
+            <div class="col-md-4 grid-service-in">
+                <p style="color:#0e4d6f; font-size:2rem;">Review History</p>
+                <br/>
+                <ul class="drop">
+                    <li><a href="#"><img src="ui/images/logo1.png" height="80px" width="80px"/>
+                            <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: <b id="date"></b>
+                            <br/>Review rating: 5/10
+                            <br/>Reward received: $5</p>
+                        </a></li>
+                    <li><a href="#"><img src="ui/images/logo2.jpg" height="80px" width="80px"/>
+                        <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: 02 JUN 2018
+                            <br/>Review rating: 5/10
+                            <br/>Reward received: $5</p></a></li>
+                    <li><a href="#"><img src="ui/images/logo3.png" height="80px" width="80px"/>
+                        <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: 03 JUN 2018
+                            <br/>Review rating: 5/10
+                            <br/>Reward received: $5</p></a></li>
+                    <li><a href="#"><img src="ui/images/logo4.jpg" height="80px" width="80px"/>
+                        <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: 04 JUN 2018
+                            <br/>Review rating: 5/10
+                            <br/>Reward received: $5</p></a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!---->
+<div class="footer">
+    <script type="text/javascript">
+						$(document).ready(function() {
+							/*
+							var defaults = {
+					  			containerID: 'toTop', // fading element id
+								containerHoverID: 'toTopHover', // fading element hover id
+								scrollSpeed: 1200,
+								easingType: 'linear'
+					 		};
+							*/
+
+							$().UItoTop({ easingType: 'easeOutQuart' });
+
+						});
+					</script>
+    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+</div>
+</body>
+</html>

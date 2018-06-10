@@ -60,18 +60,19 @@ app.get('/get_info', function (req, res) {
    // });
    console.log("Get Account info");
    request
-    .get('https://10.101.2.135:8888/v1/chain/get_account')
+    .get('http://10.101.2.135:8888/v1/chain/get_info')
     .on('response', function(response) {
       console.log('    Response code: ' + response.statusCode) // 200
       console.log('    Response content type: ' + response.headers['content-type']) // 'image/png'
       console.log('    Response body: ' + JSON.stringify(response));
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+      res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-      res.setHeader('Access-Control-Allow-Credentials', true);
+      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, accept');
+      res.setHeader('Content-Type', 'application/x-www-form-urlencoded');
+      // res.setHeader('Access-Control-Allow-Credentials', true);
       response.on('data', function (chunk) {
         console.log('BODY: ' + chunk);
-        res.end(chunk);
+        res.end('{ "status": 200, "date": "17th May 2019", "rating": "4.5", "reward": "0.9"}');
       });
     })
 });
@@ -92,7 +93,7 @@ app.get('/profile', function (req, res) {
       console.log('    Response code: ' + response.statusCode) // 200
       console.log('    Response content type: ' + response.headers['content-type']) // 'image/png'
       console.log('    Response body: ' + JSON.stringify(response));
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+      res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
       res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
       res.setHeader('Access-Control-Allow-Credentials', true);
@@ -106,11 +107,20 @@ app.get('/profile', function (req, res) {
 // client can make review by posting product id and user id
 app.post('/makeReview', function (req, res) {
    console.log("**** POST request for the make review ****");
-
-   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+   // request body: productid userid rating comment
+   // post body: productid userid rating comment currenttime
+   res.setHeader('Access-Control-Allow-Origin', '*');
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
    res.setHeader('Access-Control-Allow-Credentials', true);
+
+   var resObject = JSON.parse(req.body);
+   var productid = resObject.productid;
+   var userid = resObject.userid;
+   var rating = resObject.comment;
+   var currenttime = String(new Date());
+   console.log(productid);
+   console.log(currenttime);
 
    console.log("**** Make transaction ****");
    var transactionPromise =  eos.transaction({
@@ -139,7 +149,7 @@ app.post('/makeReview', function (req, res) {
      // Log the rejection reason
     (reason) => {
          console.log('Handle rejected promise ('+reason+') here.');
-         res.send({ status: "failed"});
+         res.send('{ "status": "failed"}');
    });
 
    // res.send({
@@ -155,9 +165,11 @@ app.post('/makeReview', function (req, res) {
 // user can get review by user id and product id
 app.post('/getReviewById', function (req, res) {
    console.log("**** POST request for the get review ****");
-   var jsondata = JSON.parse(JSON.stringify(req.body));
-   var userid =  jsondata.user.id;
-   var productid = jsondata.product.id;
+   var jsondata = JSON.parse(req.body);
+   var userid =  jsondata.userid;
+   var productid = jsondata.productid;
+
+   console.log(userid);
 
    var postTableData = {
     "json": { "type": "bool", "default": false},
@@ -171,7 +183,7 @@ app.post('/getReviewById', function (req, res) {
   }
 
 
-   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+   res.setHeader('Access-Control-Allow-Origin', '*');
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
    res.setHeader('Access-Control-Allow-Credentials', true);
@@ -185,7 +197,7 @@ app.post('/getReviewById', function (req, res) {
      console.log('    Response code: ' + response.statusCode) // 200
      console.log('    Response content type: ' + response.headers['content-type']) // 'image/png'
      console.log('    Response body: ' + JSON.stringify(response));
-     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+     res.setHeader('Access-Control-Allow-Origin', '*');
      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
      res.setHeader('Access-Control-Allow-Credentials', true);
@@ -260,7 +272,7 @@ app.post('/getItemAverageRating', function (req, res) {
     "limit": {"type": "uint32", "default": "10"}
   }
 
-   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+   res.setHeader('Access-Control-Allow-Origin', '*');
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
    res.setHeader('Access-Control-Allow-Credentials', true);
@@ -274,7 +286,7 @@ app.post('/getItemAverageRating', function (req, res) {
    //   console.log('    Response code: ' + response.statusCode) // 200
    //   console.log('    Response content type: ' + response.headers['content-type']) // 'image/png'
    //   console.log('    Response body: ' + JSON.stringify(response));
-     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+     res.setHeader('Access-Control-Allow-Origin', '*');
      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
      res.setHeader('Access-Control-Allow-Credentials', true);
@@ -317,7 +329,7 @@ app.post('/listOfUserReview', function (req, res) {
   }
 
 
-   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+   res.setHeader('Access-Control-Allow-Origin', '*');
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
    res.setHeader('Access-Control-Allow-Credentials', true);
@@ -331,7 +343,7 @@ app.post('/listOfUserReview', function (req, res) {
    //   console.log('    Response code: ' + response.statusCode) // 200
    //   console.log('    Response content type: ' + response.headers['content-type']) // 'image/png'
    //   console.log('    Response body: ' + JSON.stringify(response));
-     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+     res.setHeader('Access-Control-Allow-Origin', '*');
      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
      res.setHeader('Access-Control-Allow-Credentials', true);

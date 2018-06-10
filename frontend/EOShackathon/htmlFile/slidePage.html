@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="../dist/css/swiper.min.css">
+
+    <link href="../ui/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="../ui/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Medical, Drug, Fake drug detection, rewards" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="../js/move-top.js"></script>
+    <script type="text/javascript" src="../js/easing.js"></script>
+
+    <!-- Demo styles -->
+    <style>
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      /*background: #eee;*/
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 85%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      color: #fff;
+      /*background: #fff;*/
+      background: url(../ui/images/banner11.jpg) no-repeat;
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+    .productInfo {
+        margin-top: 2rem;
+    }
+  </style>
+
+    <script>
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://10.101.1.167:9001/get_info";
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var out = JSON.parse(this.responseText);
+            myFunction(out);
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    function myFunction(out) {
+
+         document.getElementById("id01").innerHTML = out;
+
+
+    }
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <div class="container">
+        <div class="logo">
+            <!--<a href="index.html"><img src="ui/images/log.png" width="70px" alt=""></a>
+            -->
+            <p style="margin-top:2rem; margin-bottom:1rem; font-size:2em;">RateChain</p>
+        </div>
+        <div class="top-nav">
+            <span class="menu"><img src="../ui/images/menu.svg" width="30px" alt=""> </span>
+            <ul >
+                <li class="active" ><a href="slidePage.html" >Home</a></li>
+                <li><a href="scan.html">Product</a></li>
+                <li><a href="sharing.html" >Community</a></li>
+                <li><a href="profile.html" >Profile</a></li>
+            </ul>
+            <!--script-->
+            <script>
+					$("span.menu").click(function(){
+						$(".top-nav ul").slideToggle(500, function(){
+						});
+					});
+			</script>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+<!-- Swiper -->
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" >
+            <div class="item-bottom">
+                <div class="item-right" >
+                    <h1>Brand new shopping experience</h1>
+                    <span>Trust your peer</span>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <p>Every product review is trustworthy</p>
+                    <!--<img src="../ui/images/product1.png" height="250px"/>
+                    <h1></h1>
+                    <div class="productInfo">
+                        <p>Product name: sample</p>
+                        <p>Product price: $200 </p>
+                        <p>Product description:- Solid tone flare midi skirt
+                            - Lined
+                            - Mid rise
+                            - Regular fit
+                            - Side zip fastening
+                            - Cotton
+                        </p>
+                        <p>Product rating: 8/10</p>
+
+
+                    </div>
+
+
+                    <br/>-->
+
+                    <br/><span><div id="id01"></div></span>
+                    <a href="scan.html"><i> </i>Shop now</a>
+                </div>
+            </div>
+
+        </div>
+        <!--<div class="swiper-slide">
+            <div class="item-bottom">
+                <div class="item-right">
+                    <h1>Reporting Fake Drugs</h1>
+                    <span>Immediately report any fake drugs</span>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <p>For each fake drug reported, tokens will be offered as rewards.</p>
+                    <br/>
+                    <a href="report.html"><i> </i>Report </a>
+                </div>
+            </div>
+        </div>-->
+        <div class="swiper-slide">
+            <div class="item-bottom">
+                <div class="item-right">
+                    <h1>Sharing to Community</h1>
+                    <span>Care for family and friends</span>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <p>Share drug information with the whole community for more effective information flow.</p>
+                    <br/>
+                    <a href="sharing.html"><i> </i>Share </a>
+                </div>
+            </div>
+        </div>
+        <!--<div class="swiper-slide">Slide 4</div>
+        <div class="swiper-slide">Slide 5</div>-->
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
+<!-- Swiper JS -->
+<script src="../dist/js/swiper.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+</body>
+</html>

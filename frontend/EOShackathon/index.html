@@ -28,11 +28,15 @@
             margin-right: 3em;
             vertical-align: middle;
         }
+
+        body {
+            font-family: Helvetica;
+        }
     </style>
 
     <script>
 
-        var xmlhttp = new XMLHttpRequest();
+        /*var xmlhttp = new XMLHttpRequest();
         var url = "http://10.101.1.167:9001/get_info";
 
         xmlhttp.onreadystatechange = function() {
@@ -46,20 +50,22 @@
             //console.log(this.status);
         };
         xmlhttp.open("GET", url, true);
-        xmlhttp.send();
+        xmlhttp.send();*/
 
 
 
         var xmlhttp = new XMLHttpRequest();
-        var url = "http://10.101.1.167:9001/makeReview";
+        //var url = "http://10.101.2.135:8888/makeReview";
 
         //xmlhttp.open("POST", url, true);
-        xmlhttp.open("GET", "http://10.101.1.167:9001/get_info", true);
+        xmlhttp.open("GET", "http://10.101.2.135:8888/getReviewById", true);
         
-        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
 
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+                var myArr = JSON.parse(this.responseText);
+                myFunction(myArr);
             }
         };
         //xmlhttp.send(JSON.stringify(json));
@@ -67,13 +73,11 @@
         //MyFunction();
 
         function myFunction(arr) {
-            //var out = "";
-            //var i;
-            //for(i = 0; i < arr.length; i++) {
-            //    out += '<a href="' + arr[i].url + '">' +
-            //    arr[i].display + '</a><br>';
-            //}
-            document.getElementById("date").innerHTML = arr;
+            var comment = arr.review_desc;
+            var rating = arr.rating;
+            var date = arr.transaction_date;
+            document.getElementById("date").innerHTML = date;
+            document.getElementById("rating").innerHTML = rating;
         }
     </script>
 </head>
@@ -84,7 +88,7 @@
         <div class="logo">
             <span class="menuicon"><img src="ui/images/menu.svg" style="vertical-align:middle" width="35px" alt="Menu"> </span>
 
-            <p id="appName">DRate</p><span class="transfericon"><img src="ui/images/moneyicon.jpg"  style="vertical-align:middle"
+            <p id="appName">RATEos</p><span class="transfericon"><img src="ui/images/moneyicon.jpg"  style="vertical-align:middle"
                                                                                                                     width="40px" alt="Transfer to Bank"> </span>
         </div>
         <div class="top-nav">
@@ -112,8 +116,9 @@
     <div class="container">
         <div class="col-md-6 banner-matter-in">
             <img src="ui/images/usericon.png" width="60px"/>
-            <h1 style="display:inline-block;padding-left:2rem;padding-bottom:0;font-size:3rem;">Chan Tai Man
-            <br/>Wallet: $350</h1>
+            <div style="display:inline-block">
+            <p style="padding-left:2rem;padding-bottom:0;font-size:2rem;color:black">ChanTM<br/></p><p style="padding-left:2rem;font-size:1.3rem;color:black">+852 9123 4567<br/>Wallet: $350</p>
+            </div>
         </div>
         <div class="col-md-6 banner-side side-banner">
             <div class="col-md-6 side">
@@ -137,20 +142,19 @@
                 <ul class="drop">
                     <li><a href="#"><img src="ui/images/logo1.png" height="80px" width="80px"/>
                             <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: <b id="date"></b>
-                            <br/>Review rating: 5/10
-                            <br/>Reward received: $5</p>
+                            <br/>Review rating: <b id="rating"></b>/5
+                            <br/>Reward received: $<b>5</b></p>
                         </a></li>
                     <li><a href="#"><img src="ui/images/logo2.jpg" height="80px" width="80px"/>
-                        <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: 02 JUN 2018
-                            <br/>Review rating: 5/10
+                        <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: Sat Jun 02 2018 08:30:23 GMT+000 (HKT)
+                            <br/>Review rating: 3.5/5
                             <br/>Reward received: $5</p></a></li>
                     <li><a href="#"><img src="ui/images/logo3.png" height="80px" width="80px"/>
-                        <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: 03 JUN 2018
-                            <br/>Review rating: 5/10
+                        <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: Sun May 30 2018 07:35:49 GMT+000 (HKT)
+                            <br/>Review rating: 4.5/5
                             <br/>Reward received: $5</p></a></li>
                     <li><a href="#"><img src="ui/images/logo4.jpg" height="80px" width="80px"/>
-                        <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: 04 JUN 2018
-                            <br/>Review rating: 5/10
+                        <p style="display: inline-block;padding-left:1rem;padding-top: 0.7rem;">Review date: Mon May 02 2018 13:50:43 GMT+000 (HKT)
                             <br/>Reward received: $5</p></a></li>
                 </ul>
             </div>

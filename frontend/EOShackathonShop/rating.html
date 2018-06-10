@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh">
+<head>
+    <title>My Account  | MyDress Hong Kong</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="MyDress is a online shopping platform for Hong Kong girls. Over thousands of dresses, everyday new arrivals come and fast delivery is possible." />
+    <meta name="keywords" content="Dress,online shopping,fashion,fast fashion,Korean fashion,Tokyo fashion,Cherrykoko,nissen" />
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.mydress.com/skin/frontend/default/rwd_mobile/js/jquery.mobile.1.4.5.custom.min.js"></script>
+    <script type="text/javascript" src="https://www.mydress.com/skin/frontend/default/rwd_mobile/js/modernizr.custom.js"></script>
+    <script type="text/javascript" src="https://tags.bkrtx.com/js/bk-coretag.js"></script>
+    <script defer src="https://www.mydress.com/skin/frontend/default/rwd_mobile/js/jquery.easing.1.3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://www.mydress.com/skin/frontend/default/rwd_web/css/bootstrap.web.css?20180511" media="all" />
+    <link rel="stylesheet" type="text/css" href="https://www.mydress.com/skin/frontend/default/rwd_mobile/css/swiper.3.4.1.css?20180511" media="all" />
+    <link rel="stylesheet" type="text/css" href="https://www.mydress.com/skin/frontend/default/rwd_web/css/web.css?20180511" media="all" />
+    <link rel="stylesheet" type="text/css" href="https://www.mydress.com/skin/frontend/base/default/css/mirasvit/rma/fixed.css?20180511" media="all" />
+    <script type="text/javascript" src="https://www.mydress.com/merge/js/501695b59d8873d0058580d158b765c8.js"></script>
+
+    <script type="text/javascript">
+//<![CDATA[
+optionalZipCountries = ["MO","HK"];
+//]]>
+</script>
+
+    <link rel="apple-touch-icon" href="https://www.mydress.com/skin/frontend/default/rwd_mobile/images/mydress_iphone_logo.png">
+
+
+
+    <script>
+
+  function gup( name, url ) {
+    if (!url) url = location.href
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( url );
+    return results == null ? null : results[1];
+  }
+
+  if(gup('utm_source', window.location.href) != null || gup('utm_medium', window.location.href) != null){
+    document.cookie = 'utm_source=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'utm_medium=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'refer=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+
+  if(gup('gclid', window.location.href) != null){
+    var today = new Date();
+    var expire = new Date();
+    expire.setTime(today.getTime() + 3600000*24*30);
+    document.cookie = "refer=google;expires="+expire.toGMTString()+";path=/";
+  }
+
+  if(gup('utm_source', window.location.href) == "bing" && gup('utm_medium', window.location.href) == "cpc"){
+    var today = new Date();
+    var expire = new Date();
+    expire.setTime(today.getTime() + 3600000*24*30);
+    document.cookie = "refer=bing;expires="+expire.toGMTString()+";path=/";
+  }
+
+  if(gup('ref', window.location.href) == "GWM" && gup('ref2', window.location.href) ){
+    var today = new Date();
+    var expire = new Date();
+    var affid = gup('ref2', window.location.href);
+    expire.setTime(today.getTime() + 3600000*24*30);
+    document.cookie = "affid="+ affid +";expires="+expire.toGMTString()+";path=/";
+  }
+
+  if(gup('utm_source', window.location.href) == "Rakuten" && gup('utm_medium', window.location.href) == "Affiliate"){
+    var today = new Date();
+    var expire = new Date();
+    expire.setTime(today.getTime() + 3600000*24*30);
+    //document.cookie = "refer=Rakuten;expires="+expire.toGMTString()+";path=/";
+    setCookie('refer', 'Rakuten', 1);
+  }
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+  }
+
+  function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      var expires = "expires="+d.toUTCString();
+      document.cookie = cname + "=" + cvalue + "; " + expires + ";path=/";
+  }
+
+  function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+      var pair = vars[i].split("=");
+      if (pair[0] == variable) {
+        return pair[1];
+      }
+    }
+    return "";
+  }
+
+  function MyFunction(){
+     document.getElementById('myModal').style.display = "block";
+     document.getElementById('navBar').style.zIndex = "1";
+  }
+
+  function closeModal(){
+      document.getElementById('myModal').style.display = "none";
+
+  }
+
+  function displayThanks(){
+    document.getElementById('modal-detail').innerHTML = '<img src="ui/images/moneyhand.png" width="200px"/><p>Reward has been transferred to your DRate Wallet!</p><p>Thanks for your valuable rating:)</p> <a href="rating.html">View the Product Ratings</a>';
+  }
+
+  function viewReview() {
+        document.getElementById('allReview').style.display = "inline-block";
+
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.open("GET", "http://10.101.2.135:8888/getReviewById", true);
+
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var myArr = JSON.parse(this.responseText);
+                myFunction(myArr);
+            }
+        };
+
+        xmlhttp.send();
+
+
+        function myFunction(arr) {
+            var comment = arr.review_desc;
+            var rating = arr.rating;
+            var date = arr.transaction_date;
+            document.getElementById("date").innerHTML = date;
+            document.getElementById("rate").innerHTML = rating;
+            document.getElementById("comment").innerHTML = comment;
+        }
+
+
+
+  }
+
+  window.onclick = function(event) {
+      if (event.target == document.getElementById('myModal')) {
+          document.getElementById('myModal').style.display = "none";
+      }
+  }
+</script>
+
+    <style>
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 2; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: visible; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .closeBtn {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .closeBtn:hover,
+    .closeBtn:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    #viewBtn {
+        display: block;
+        width: 150px;
+        height: 4rem;
+        background: #fff;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        border:2px solid black;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+</style>
+
+
+    <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '303446203144652');
+  fbq('track', "PageView");</script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=303446203144652&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <script>
+  setCookie('criteo_check_member2', '1', 365);  </script>
+    <!--ewpagecache:page_html_header_end-->
+    <script>
+  if(getQueryVariable("utm_source") != "" || getQueryVariable("utm_medium") != "" || getQueryVariable("utm_campaign") != "" || getQueryVariable("utm_content") != ""){
+    var utmArray = {};
+    utmArray["utm_source"] = "(direct)";
+    utmArray["utm_medium"] = "(none)";
+    utmArray["utm_campaign"] = "(direct)";
+    utmArray["utm_content"] = "(none)";
+    if(typeof getQueryVariable("utm_source") != "undefined" && getQueryVariable("utm_source") != ""){
+      utmArray["utm_source"] = getQueryVariable("utm_source");
+    }
+    if(typeof getQueryVariable("utm_medium") != "undefined" && getQueryVariable("utm_medium") != ""){
+      utmArray["utm_medium"] = getQueryVariable("utm_medium");
+    }
+    if(typeof getQueryVariable("utm_campaign") != "undefined" && getQueryVariable("utm_campaign") != ""){
+      utmArray["utm_campaign"] = getQueryVariable("utm_campaign");
+    }
+    if(typeof getQueryVariable("utm_content") != "undefined" && getQueryVariable("utm_content") != ""){
+      utmArray["utm_content"] = getQueryVariable("utm_content");
+    }
+
+    var today = new Date();
+    var expire = new Date();
+    expire.setTime(today.getTime() + 3600000*24*30*12);
+    document.cookie = "criteo_utm="+JSON.stringify(utmArray)+";expires="+expire.toGMTString()+";path=/";
+  }
+</script>
+
+
+
+</head>
+<body class=" customer-account-index">
+
+
+<div data-role="page">
+    <div class="header" data-role="header">
+        <div id='wholesite-banner-wrapper' class='wholesite-banner'>
+            <div>
+                <div class='wholesite-banner-text text-center container'><h3><a  class='normal' href='/women/shoes?src=wholesite1_20180609_362748'> Let's get the latest dress from Korea now!</a></h3></div>
+            </div>
+        </div>
+
+        <script type='text/javascript'>
+        </script>
+        <div class="floating-icon">
+        </div>
+
+        <div class="header-container">
+
+        </div>
+    </div>
+
+    <!-- new member $100 coupon -->
+    <div id="subscribe-email"></div>
+    <script type="text/javascript">
+		jQuery.noConflict();
+		jQuery(document).ready(function($) {
+			$("#subscribe-email").hide();
+			var data = document.cookie.match(new RegExp("(^| )head_coupon_hide=([^;]*)(;|$)"));
+			if(data != null) {
+				return;
+			}
+			$.ajax({
+				url : '/icustomer/coupon/gethtml',
+				type : 'post',
+				data : 'v=1',
+				success : function(respon) {
+					if (respon) {
+						$('#subscribe-email').appendTo("body"); // avoid conflict with offcanvas code
+						$("#subscribe-email").show().html(respon);
+						//$("#subscribe-email").slideDown('fast');
+					}
+				}
+			});
+		});
+	</script>
+
+    <div class='masthead'>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-xs-4'>
+                    <div id='topsearch'>
+                        <form id="search_mini_form" action="https://www.mydress.com/catalogsearch/result/" method="get" data-ajax="false">
+                            <div class="form-search search_box">
+                                <input class='form-control' id="search" type="text" name="q" placeholder="Search"  />
+                                <a onclick=' if( $( "search").value != "Search" ){ search_mini_form.submit();  } ' id='search-icon' ><span class="search-icon glyphicon glyphicon-search"></span></a>
+
+                                <div id="search_autocomplete" class="search-autocomplete"></div>
+                                <script type="text/javascript">
+        //<![CDATA[
+            var searchForm = new Varien.searchForm('search_mini_form', 'search', 'Search');
+        //    searchForm.initAutocomplete('http://www.mydress.com/catalogsearch/ajax/suggest/', 'search_autocomplete');
+        //]]>
+        </script>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div id='logo' class='col-xs-4 text-center'>
+                    <a class="logo" href="http://www.mydress.com/"><img src='https://www.mydress.com/skin/frontend/default/rwd_web/images/logo_mydress_v10.png' alt='' /></a>
+                </div>
+                <div class='col-xs-4 masthead-right-icon text-center'>
+
+                    <div class='my-account-icon pull-right'>
+                        <a class='normal' href='/customer/account/'>
+                            <div class='normal-line-height'><img src="ui/images/myacc.png" width="30px"/></div>
+                            <div class='mt-xs'><strong>My Account</strong></div>
+                        </a>
+                    </div>
+                    <div class='wishlist-icon pull-right'>
+                        <a class='normal' href='/wishlist/'>
+                            <div class='normal-line-height'><img src="ui/images/wishlist.png" width="30px"/></div>
+                            <div class='mt-xs'><strong>Wishlist</strong></div>
+                            <span id='wishlist-header-qty' class='hidden'></span>
+                        </a>
+                    </div>
+                    <div class='navbar-cart cart-icon pull-right'>
+                        <a id='shopping-cart-icon' class='normal' href='/checkout/cart/'>
+                            <div class='normal-line-height'><img src="ui/images/cart.png" width="30px"/></div>
+                            <span class='badge'>0</span>
+                            <div class='mt-xs'><strong>Cart</strong></div>
+                        </a>
+                    </div>
+                    <div class='clearfix'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- nav/menu panel -->
+    <nav id="navBar" class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+
+            </div>
+            <div id="navbar2" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li id="nav-new-arrival"><a href="/women/brand/new_arrival?src=menu">New Arrivals</a></li>
+                    <li id="nav-korean-fashion" class="dropdown"><a href="/women/brand/korean_fashion?src=menu" class="dropdown-toggle">Korean Fashion</a>
+                        <ul class="dropdown-menu dropdown-menu-3col">
+                            <li>
+                                <div class="row">
+                                    <ul class="col-xs-4 list-unstyled">
+                                        <li class="dropdown-header">Popular brand</li>
+                                        <li><a href="/brand/attrangs?src=menu">ATTRANGS</a></li>
+                                        <li><a href="/brand/chuu?src=menu">CHUU</a></li>
+                                        <li><a href="/brand/cherrykoko?src=menu">CHERRYKOKO</a></li>
+                                        <li><a href="/brand/clicknfunny?src=menu">CLICK&amp;FUNNY</a></li>
+                                        <li><a href="/brand/dailylook?src=menu">DAILYLOOK</a></li>
+                                        <li><a href="/brand/icecream12?src=menu">ICECREAM12</a></li>
+                                        <li><a href="/brand/justone?src=menu">JUSTONE</a></li>
+                                        <li><a href="/brand/masandchris?src=menu">MASANDCHRIS</a></li>
+                                    </ul>
+                                    <ul class="col-xs-4 list-unstyled">
+                                        <li class="dropdown-header"><span class="invisible">Popular brands</span></li>
+                                        <li><a href="/brand/michyeora?src=menu">MICHYEORA</a></li>
+                                        <li><a href="/brand/niponjjuya?src=menu">NIPONJJUYA</a></li>
+                                        <li><a href="/brand/planj?src=menu">PLANJ</a></li>
+                                        <li><a href="/brand/ssunny?src=menu">SSUNNY</a></li>
+                                        <li><a href="/brand/styleberry?src=menu">STYLEBERRY</a></li>
+                                        <li><a href="/brand/tomnrabbit?src=menu">TOMNRABBIT</a></li>
+                                        <li><a href="/brand/qnigirls?src=menu">QNIGIRLS</a></li>
+                                        <li><a href="/brand/22xx?src=menu">22XX</a></li>
+                                    </ul>
+                                    <ul class="col-xs-4 list-unstyled">
+                                        <li class="dropdown-header">New brand</li>
+                                        <li><a href="/brand/ain?src=menu">AIN</a></li>
+                                        <li><a href="/brand/cherryville?src=menu">CHERRYVILLE</a></li>
+                                        <li><a href="/brand/chichera?src=menu">CHICHERA</a></li>
+                                        <li><a href="/brand/dabagirl?src=menu">DABAGIRL</a></li>
+                                        <li><a href="/brand/hotping?src=menu">HOTPING</a></li>
+                                        <li><a href="/brand/uptownholic?src=menu">UPTOWNHOLIC</a></li>
+                                        <li><a href="/brand/906studio?src=menu">906STUDIO</a></li>
+                                        <li><a href="/korean_brands?src=menu">More</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul> </li>
+                    <li id="nav-clothing" class="dropdown"> <a href="/women/clothing?src=menu" class="dropdown-toggle">Girls' Fashion</a>
+                        <ul class="dropdown-menu dropdown-menu-2col">
+                            <li>
+                                <div class="row">
+                                    <ul class="col-xs-4 list-unstyled">
+                                        <li class="dropdown-header">Categories</li>
+                                        <li><a href="/women/clothing/onepiece?src=menu">One-piece</a></li>
+                                        <li><a href="/women/clothing/top?src=menu">Top</a></li>
+                                        <li><a href="/women/clothing/skirt?src=menu">Skirt</a></li>
+                                        <li><a href="/women/clothing/pants?src=menu">Pants</a></li>
+                                        <li><a href="/women/clothing/top/tee?src=menu">Tee</a></li>
+                                        <li><a href="/women/clothing/coat?src=menu">Coat</a></li>
+                                        <li><a href="/women/brand/beachwear_collection?src=menu">Beachwear<span class="badge badge-primary">NEW</span></a></li>
+                                        <li><a href="/women/clothing/sportswear?src=menu">Sportswear</a></li>
+                                    </ul>
+                                    <ul class="col-xs-8 list-unstyled">
+                                        <li class="dropdown-header">Popular brand</li>
+                                        <li><a href="/brand/mayuki?src=menu">Tokyo Fashion</a></li>
+                                        <li><a href="/brand/nissen?src=menu">nissen</a></li>
+                                        <li><a href="/brand/eyescream?src=menu">Eyescream</a></li>
+                                        <li><a href="/women/brand/g2000?src=menu">G2000<span class="badge badge-primary">NEW</span></a></li>
+                                        <li><a href="/brand/ruby_s_collection?src=menu">Ruby's Collection</a></li>
+                                        <li><a href="/brand/miss_runner?src=menu">MISS RUNNER</a></li>
+                                        <li><a href="/brand/kollection?src=menu">KOLLECTION</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul> </li>
+                    <li id="nav-underwear" class="dropdown"> <a href="/women/underwear?src=menu" class="dropdown-toggle">Underwear</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Popular brand</li>
+                            <li><a href="/brand/qmomo?src=menu">Qmomo</a></li>
+                            <li><a href="/brand/on_street?src=menu">ONS</a></li>
+                            <li><a href="/women/underwear/brand/nissen?src=menu">nissen</a></li>
+                            <li><a href="/brand/i_pink?src=menu">i PINK</a></li>
+                            <li><a href="/brand/lepoux?src=menu">Lepoux</a></li>
+                        </ul> </li>
+                    <li id="nav-shoes" class="dropdown"> <a href="/women/shoes?src=menu" class="dropdown-toggle">Shoes</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Popular brand</li>
+                            <li><a href="/brand/fmshoes?src=menu">Fmshoes</a></li>
+                            <li><a href="/brand/ann_s?src=menu">Ann'S</a></li>
+                            <li><a href="/brand/scholl?src=menu">Scholl</a></li>
+                            <li><a href="/brand/butterfly_twists?src=menu">Butterfly Twists</a></li>
+                            <li><a href="/women/shoes/brand/nissen?src=menu">nissen</a></li>
+                            <li><a href="/women/shoes/brand/eyescream?src=menu">Eyescream</a></li>
+                            <li><a href="/brand/spur?src=menu">SPUR</a></li>
+                            <li><a href="/brand/joy_mario?src=menu">Joy&amp;Mario</a></li>
+                        </ul> </li>
+                    <li id="nav-plus-size" class="dropdown"> <a href="/brand/oversized?src=menu" class="dropdown-toggle">Oversized</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Popular brand</li>
+                            <li><a href="/brand/oversized/nissen?src=menu">nissen</a></li>
+                            <li><a href="/brand/poly_lulu?src=menu">Polylulu</a></li>
+                        </ul> </li>
+                    <li id="nav-beauty" class="dropdown"> <a href="/beauty-skincare?src=menu" class="dropdown-toggle">Cosmetics</a>
+                        <ul class="dropdown-menu dropdown-menu-2col">
+                            <li>
+                                <div class="row">
+                                    <ul class="col-xs-4 list-unstyled">
+                                        <li class="dropdown-header">Popular brand</li>
+                                        <li><a href="/beauty-skincare/makeup-1?src=menu">Make up</a></li>
+                                        <li><a href="/beauty-skincare/skincare?src=menu">Skin care</a></li>
+                                        <li><a href="/beauty-skincare/personal-care?src=menu">Personal care</a></li>
+                                        <li><a href="/beauty-skincare/makeup-1/lip-gloss?src=menu">Lip gloss</a></li>
+                                        <li><a href="/beauty-skincare/skincare/masks?src=menu">Masks</a></li>
+                                        <li><a href="/beauty-skincare/makeup-1/eyebrow?src=menu">Eyebrow</a></li>
+                                    </ul>
+                                    <ul class="col-xs-8 list-unstyled">
+                                        <li class="dropdown-header">Popular brand</li>
+                                        <li><a href="/brand/apieu?src=menu">Apieu</a></li>
+                                        <li><a href="/beauty-skincare/brand/chuu?src=menu">CHUU BEIGE</a></li>
+                                        <li><a href="/brand/i_m_meme-pony_x_memebox?src=menu">I'M MEME</a></li>
+                                        <li><a href="/brand/faith_in_face?src=menu">Faith in Face</a></li>
+                                        <li><a href="/brand/missha?src=menu">Missha</a></li>
+                                        <li><a href="/brand/bbia?src=menu">BbiA</a></li>
+                                        <li><a href="/brand/rire?src=menu">RiRe</a></li>
+                                        <li><a href="/brand/aritaum?src=menu">Aritaum</a></li>
+                                        <li><a href="/brand/veet?src=menu">Veet</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul> </li>
+                    <li id="nav-lifestyle"><a href="/lifestyle?src=menu">Lifestyle</a></li>
+
+                    <li id="nav-men" class="dropdown"> <a href="/men?src=menu" class="dropdown-toggle"></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-header">Popular brand</li>
+                            <li><a href="/men/brand/g2000?src=menu">G2000<span class="badge badge-primary">NEW</span></a></li>
+                            <li><a href="/men/brand/nissen?src=menu">nissen</a></li>
+                        </ul> </li>
+                    <script type="text/javascript">// <![CDATA[
+  jQuery('ul.nav li.dropdown').hover(function() {
+    jQuery(this).find('.dropdown-menu').first().stop(true,true).delay(0).fadeIn(0);
+  }, function() {
+    jQuery(this).find('.dropdown-menu').first().stop(true,true).delay(0).fadeOut(0);
+  });
+
+  if (document.URL.indexOf("/men") > -1){
+		jQuery("#nav-men").addClass("active");
+  }
+  else if (document.URL.indexOf("/brand/new_arrival") > -1){
+    jQuery("#nav-new-arrival").addClass("active");
+  }
+  else if (document.URL.indexOf("/brand/korean_fashion") > -1){
+    jQuery("#nav-korean-fashion").addClass("active");
+  }
+  else if (document.URL.indexOf("/women/clothing") > -1){
+    jQuery("#nav-clothing").addClass("active");
+  }
+  else if (document.URL.indexOf("/women/underwear") > -1){
+    jQuery("#nav-underwear").addClass("active");
+  }
+  else if (document.URL.indexOf("/women/shoes") > -1){
+    jQuery("#nav-shoes").addClass("active");
+  }
+  else if (document.URL.indexOf("/brand/beachwear") > -1){
+    jQuery("#nav-beachwear").addClass("active");
+  }
+  else if (document.URL.indexOf("/kids") > -1){
+    jQuery("#nav-kids").addClass("active");
+  }
+  else if (document.URL.indexOf("/brand/oversized") > -1){
+    jQuery("#nav-plus-size").addClass("active");
+  }
+  else if (document.URL.indexOf("/women/accessories") > -1){
+    jQuery("#nav-accessories").addClass("active");
+  }
+  else if (document.URL.indexOf("/beauty-skincare") > -1){
+    jQuery("#nav-beauty").addClass("active");
+  }
+  else if (document.URL.indexOf("/lifestyle") > -1){
+    jQuery("#nav-lifestyle").addClass("active");
+  }
+// ]]></script>				</ul>
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+<script type='text/javascript'>
+	function subscribe_email_check() {
+		if (document.form_subscribe.subscribe_email.value == '' || !validateEmail(document.form_subscribe.subscribe_email.value)) {
+			alert('Please enter email address');
+			document.form_subscribe.subscribe_email.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+
+<!--ewpagecache:page_html_ga_begin:--><script type="text/javascript">
+  var ga_data = ga_data ||  {};
+  // customer id
+  ga_data['user_id'] = "114362";
+</script>
+<!--ewpagecache:page_html_ga_end-->	</div>
+<div class="container" data-role="content">
+    <noscript>
+        <div class="noscript">
+            <div class="noscript-inner">
+                <p><strong>JavaScript seem to be disabled in your browser.</strong></p>
+                <p>You must have JavaScript enabled in your browser to utilize the functionality of this website.</p>
+            </div>
+        </div>
+    </noscript>
+    <div class="page">
+
+        <div class="main-container col2-left-layout">
+            <div class="row main">
+                <div class="col-xs-3 col-left sidebar">
+                    <div class="block-account">
+                        <div id="my-account-menu" class="list-group block-content">
+                            <a id="my-account-dashboard" class="list-group-item" href="http://www.mydress.com/customer/account/" data-role="button">My Order</a>
+                            <a id="my-account-vip" class="list-group-item" href="http://www.mydress.com/vipaccount/" data-role="button">VIP Plan</a>
+                            <a id="my-account-wishlist" class="list-group-item" href="http://www.mydress.com/wishlist/" data-role="button">Wishlist</a>
+                            <a id="my-account-edit" class="list-group-item" href="http://www.mydress.com/customer/account/edit/" data-role="button">Account Information</a>
+                            <a id="my-account-mydollar" class="list-group-item" href="http://www.mydress.com/rewardpoints/index/points/" data-role="button">MyDollar</a>
+                            <a id="my-account-logout" class="list-group-item" href="http://www.mydress.com/customer/account/logout/" data-role="button">Logout</a>
+                        </div>
+                    </div>
+                    <script>
+	if (document.URL.indexOf("/customer/account/edit") > -1){
+		jQuery("#my-account-edit").addClass("active");
+	}
+	else if (document.URL.indexOf("/vipaccount") > -1){
+		jQuery("#my-account-vip").addClass("active");
+	}
+	else if (document.URL.indexOf("/wishlist") > -1){
+		jQuery("#my-account-wishlist").addClass("active");
+	}
+	else if (document.URL.indexOf("/customer/account") > -1){
+		jQuery("#my-account-dashboard").addClass("active");
+	}
+	else if (document.URL.indexOf("/rewardpoints/index/points") > -1){
+		jQuery("#my-account-mydollar").addClass("active");
+	}
+	else if (document.URL.indexOf("/sales/order/view/order_id") > -1){
+		jQuery("#my-account-dashboard").addClass("active");
+	}
+</script>
+                </div>
+                <div class="col-xs-9 col-main">
+
+
+                    <table class="table data-table my-orders-table" id="">
+                        <tbody>
+
+                        <tr id="order-item-row-1177975">
+
+                            <td style="padding-right:0px; width:260px;" ><img src="ui/images/onepiece.jpg" width="250px"/>
+                            </td>
+                            <td style="padding-left:1em";>
+                                    <div >
+                                        <div class="product-name">
+                                            <div style="padding-left:0.5em;padding-bottom:1em";><b>【New Arrival】 Tokyo One-piece</b></div>
+                                        </div>
+                                    </div>
+                                <!--<div class="item-options small text-note mt-xs">-->
+                                        <table>
+                                            <!--<div style="padding-left:0.8em; padding-bottom: 0.2em;">-->
+                                                <tr>
+                                                    <td  style="padding-left:1em;padding-bottom:0.5em";>Product Id:</td>
+                                                    <td  style="padding-left:1em;padding-bottom:0.5em";>A1001-11-XL</td>
+                                                </tr>
+                                             <!--</div>-->
+                            <!--<div style="padding-left:0.8em; padding-bottom: 0.2em;">-->
+                                                <tr><td  style="padding-left:1em;padding-bottom:0.5em";>Color:</td>
+                                                    <td  style="padding-left:1em;padding-bottom:0.5em";>Blue</td>
+                                                </tr>
+                                            <!--</div>-->
+                            <!--<div style="padding-left:0.8em; padding-bottom: 0.2em;">-->
+                                            <tr><td  style="padding-left:1em;padding-bottom:0.5em";>Size:</td>
+                                                <td  style="padding-left:1em;padding-bottom:0.5em";>
+                                                                    M
+                                                                </td>
+                                            </tr>
+                                            <!--</div>-->
+                                            <tr><td  style="padding-left:1em;padding-bottom:0.5em";>
+                <!--<div style="padding-left:0.8em; padding-bottom: 0.2em;">-->
+                                                Price:</td>
+                                                <td  style="padding-left:1em;padding-bottom:0.5em";>
+                                                                    HK$262.00
+                                                                </td>
+                                            </tr>
+                                            <!--</div>-->
+
+                                            <!--<div style="padding-left:0.8em; padding-bottom: 0.2em;">-->
+                                            <tr><td  style="padding-left:1em;padding-bottom:0.5em";> Average Rating: </td>
+                                                <td  style="padding-left:1em;padding-bottom:0.5em";><b id="avgRating">4.5</b> /5</td>
+                                            </tr>
+                                        <!--</div>-->
+                                    </table>
+                                    <!--</div>-->
+                                    <div style="padding-left:0.5em;">
+                                        <a href="#" id="viewBtn" onclick="viewReview();">View all Reviews</a>
+                                    </div>
+                                <!--</div>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+
+                            <div id='allReview' style="display:none;">
+                                <p style="padding-left:0px; font-size:2em"><b>All User Reviews</b></p>
+                                <div class="reviewList">
+                                    <img src="ui/images/default.jpg" width="150px"/>
+                                    <div style="display:inline-block">
+
+                                    User: <b>ChanTM</b> <br/>
+                                    Rating: <b id="rate"></b>/5<br/>
+                                    Comment: <b id="comment"></b> <br/>
+                                    Date: <b id="date"></b> <br/>
+                                    </div>
+
+                                </div>
+
+                                <hr width="500px"/>
+
+                                <div class="reviewList">
+                                    <img src="ui/images/girl1.jpg" width="150px"/>
+                                    <div style="display:inline-block">
+                                    User: <b>Chan Ka Ki</b> <br/>
+                                    Rating: <b>2</b>/5 <br/>
+                                    Comment: <b>This dress is really good, the size fits well:)</b><br/>
+                                    Date: <b>20-05-2018 </b> <br/>
+                                    </div>
+
+                                </div>
+
+                                <hr width="500px"/>
+
+                                <div class="reviewList">
+                                    <img src="ui/images/default.jpg" width="150px"/>
+                                    <div style="display:inline-block">
+                                    User: <b>Lee Yin</b> <br/>
+                                    Rating: <b>3</b>/5 <br/>
+                                    Comment: <b>Not bad, quite good.</b> <br/>
+                                    Date: <b>13-05-2018</b> <br/>
+                                    </div>
+
+                                </div>
+
+                                <hr width="500px"/>
+
+                                <div class="reviewList">
+                                    <img src="ui/images/girl2.jpg" width="150px"/>
+                                    <div style="display:inline-block">
+
+                                    User: <b>Wong Wing Shan</b> <br/>
+                                    Rating: <b>4</b>/5 <br/>
+                                    Comment: <b>It's nice for dressing to picnic!!!</b> <br/>
+                                    Date: <b>10-05-2018</b> <br/>
+                                    </div>
+
+                                </div>
+                                <br/>
+                                <br/>
+                                <p style="text-align:right">(Powered by RATEos)</p>
+
+                                <!-- -->
+                            </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+
+                </div>
+                <div class='clearfix'></div>
+
+            </div>
+        </div>
+        <!-- GA Keep this position for uid -->
+
+    </div>
+</div>
+<div class='footer'>
+
+
+    <div class="footer-wrapper mt-lg">
+
+        <div class='container'>
+            <div class="row mb-lg text-center">
+                <div class="col-xs-3 selling-point">
+                    <div><img src="ui/images/delivery.png" width="30px"/> </span></div>
+                    <div class="mt-xs"><strong>Free delivery</strong></div>
+                </div>
+                <div class="col-xs-3 selling-point">
+                    <div><img src="ui/images/dollar.png" width="30px"/> </span></div>
+                    <div class="mt-xs"><strong>Credit card payment</strong></div>
+                </div>
+                <div class="col-xs-3 selling-point">
+                    <div><img src="ui/images/return.svg" width="30px"/> </span></div>
+                    <div class="mt-xs"><strong>14 days retweet</strong></div>
+                </div>
+                <div class="col-xs-3 selling-point last">
+                    <div><img src="ui/images/plane.png" width="30px"/> </span></div>
+                    <div class="mt-xs"><strong>New arrivals everyday</strong></div>
+                </div>
+            </div>
+            <div class="separator mb-lg"></div>
+            <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-2">
+                    <div class="mb"><strong>About MyDress</strong></div>
+                    <div class="mb-sm"><a href="/about-mydress">Brand story</a></div>
+                    <div class="mb-sm"><a href="/vipaccount/">VIP Plan</a></div>
+                    <div class="mb-sm"><a href="/brands">Brands</a></div>
+                    <div><a href="/jointpromotion">Promotions</a></div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="mb"><strong>Customer Service</strong></div>
+                    <div class="mb-sm"><a href="/shopping-notice">Shopping Notice</a></div>
+                    <div class="mb-sm"><a href="/shipping">Shipping</a></div>
+                    <div class="mb-sm"><a href="/payment">Payment</a></div>
+                    <div class="mb-sm"><a href="/returns">Returns</a></div>
+                    <div class="mb-sm"><a href="/mydollar">MyDollar</a></div>
+                    <div><a href="/business">Coorperation</a></div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="mb"><strong>Terms and Conditions</strong></div>
+                    <div class="mb-sm"><a href="/discount-tnc">Discount TnC</a></div>
+                    <div class="mb-sm"><a href="/tos">Terms of Service</a></div>
+                    <div><a href="/privacy">Privacy</a></div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="mb"><strong>Social Networking</strong></div>
+                    <div style="margin-right: 5px;" class="mb pull-left"><a target="_blank" href="https://www.facebook.com/mydress.hk"><img src="https://www.mydress.com/skin/frontend/default/rwd_web/images/fb_icon_black_40x40.png" alt="" width="30" /></a></div>
+                    <div style="margin-right: 5px;" class="mb pull-left"><a target="_blank" href="https://www.instagram.com/mydresshk" class="normal"><img src="https://www.mydress.com/skin/frontend/default/rwd_web/images/ig_icon_black_40x40.png" alt="" width="30" /></a></div>
+                    <div class="mb pull-left last"><a target="_blank" href="https://www.youtube.com/user/mydresshk" class="normal"><img src="https://www.mydress.com/skin/frontend/default/rwd_web/images/youtube_icon_black_40x40.png" alt="" width="30" /></a></div>
+                    <div class="clearfix"></div>
+                    <div class="mb"><strong>Region/Currency</strong></div>
+                    <div style="margin-right: 5px;" class="mb pull-left"><a href="?currency=HKD"><img src="https://www.mydress.com/skin/frontend/default/rwd_web/images/hk_icon_40X40.png" alt="" width="30" /></a></div>
+                    <div style="margin-right: 5px;" class="mb pull-left"><a href="?currency=TWD" class="normal"><img src="https://www.mydress.com/skin/frontend/default/rwd_web/images/tw_icon_40X40.png" alt="" width="30" /></a></div>
+                    <div style="margin-right: 5px;" class="mb pull-left"><a href="?currency=MYR" class="normal"><img src="https://www.mydress.com/skin/frontend/default/rwd_web/images/my_icon_40X40.png" alt="" width="30" /></a></div>
+                    <div class="mb pull-left last"><a href="?currency=SGD" class="normal"><img src="https://www.mydress.com/skin/frontend/default/rwd_web/images/sg_icon_40X40.png" alt="" width="30" /></a></div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="mb"><strong>Contact Us</strong></div>
+                    <h3 class="mb-sm">2180 7474</h3>
+                    <h3 class="mb-sm"><a href="mailto:cs@mydress.com">cs@mydress.com</a></h3>
+                    <div>Office Hour:<br />Mon to Fri 10:00-13:00 and <br />14:00-19:00<br />Other days: off</div>
+                </div>
+            </div>
+            <div class="mb-lg mt-lg text-center"><img style="padding-right: 20px;" src="https://www.mydress.com/skin/frontend/default/rwd_mobile/images/cc201718.png" alt="" height="60" /> <img src="https://www.mydress.com/skin/frontend/default/rwd_mobile/images/hkrma201718.png" alt="" height="60" /></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">var Translator = new Translate({"Please select an option.":"\u8acb\u9078\u64c7\u3002 ","This is a required field.":"\u9019\u662f\u5fc5\u586b\u5b57\u6bb5\u3002 ","Please enter a valid number in this field.":"\u8acb\u5728\u8a72\u6b04\u76ee\u8f38\u5165\u6b63\u78ba\u7684\u6578\u5b57\u3002 ","Please use numbers only in this field. please avoid spaces or other characters such as dots or commas.":"\u8acb\u5728\u8a72\u6b04\u76ee\u4e2d\u50c5\u4f7f\u7528\u6578\u5b57\uff0c\u4e0d\u8981\u8f38\u5165\u7a7a\u683c\u6216\u9ede\u7b49\u5b57\u7b26\u3002 ","Please use letters only (a-z) in this field.":"\u8acb\u5728\u8a72\u6b04\u76ee\u4e2d\u50c5\u8f38\u5165\u5b57\u6bcd(a-z)\u3002 ","Please use only letters (a-z), numbers (0-9) or underscore(_) in this field, first character should be a letter.":"\u8acb\u5728\u8a72\u6b04\u76ee\u4e2d\u50c5\u4f7f\u7528\u5b57\u6bcd(az)\u3001\u6578\u5b57(0-9)\u3001\u4e0b\u5283\u7dda(_)\uff0c\u7b2c\u4e00\u500b\u5b57\u7b26\u5fc5\u9808\u70ba\u5b57\u6bcd\u3002 ","Please use only letters (a-z) or numbers (0-9) only in this field. No spaces or other characters are allowed.":"\u8acb\u5728\u8a72\u6b04\u76ee\u4e2d\u50c5\u4f7f\u7528\u5b57\u6bcd(az)\u6216\u6578\u5b57(0-9)\uff0c\u4e0d\u8981\u8f38\u5165\u7a7a\u683c\u6216\u5176\u5b83\u5b57\u7b26\u3002 ","Please use only letters (a-z) or numbers (0-9) or spaces and # only in this field.":"\u8acb\u5728\u8a72\u6b04\u76ee\u4e2d\u50c5\u4f7f\u7528\u5b57\u6bcd(az)\u3001\u6578\u5b57(0-9)\u3001\u7a7a\u683c\u6216# ","Please enter a valid phone number. For example (123) 456-7890 or 123-456-7890.":"\u8acb\u8f38\u5165\u96fb\u8a71\u865f\u78bc\u3002\u4f8b\u5982(123) 456-7890\u6216123-456-7890. ","Please enter a valid date.":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u65e5\u671f\u3002 ","Please enter a valid email address. For example johndoe@domain.com.":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u96fb\u90f5\u5730\u5740\u3002\u4f8b\u5982johndoe@domain.com ","Please enter 6 or more characters.":"\u8acb\u8f38\u51656\u500b\u6216\u66f4\u591a\u5b57\u7b26\u3002 ","Please make sure your passwords match.":"\u8acb\u78ba\u8a8d\u5bc6\u78bc\u4e00\u81f4\u3002 ","Please enter a valid URL. http:\/\/ is required":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u7db2\u5740\uff0c\u8981\u5e36http:\/\/ ","Please enter a valid URL. For example http:\/\/www.example.com or www.example.com":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u7db2\u5740\u3002\u4f8b\u5982http:\/\/www.example.com\u6216www.example.com ","Please enter a valid social security number. For example 123-45-6789.":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u793e\u6703\u4fdd\u96aa\u865f\u3002\u4f8b\u5982123-45-6789 ","Please enter a valid zip code. For example 90602 or 90602-1234.":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u90f5\u7de8\u3002\u4f8b\u598290602\u621690602-1234 ","Please enter a valid zip code.":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u90f5\u7de8\u3002 ","Please use this date format: dd\/mm\/yyyy. For example 17\/03\/2006 for the 17th of March, 2006.":"\u8acb\u4f7f\u7528\u65e5\u671f\u683c\u5f0f\uff1add\/mm\/yyyy\uff0c\u4f8b\u598217\/03\/2006\u8868\u793a2006\u5e743\u670817\u65e5","Please enter a valid $ amount. For example $100.00.":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u91d1\u984d\u3002\u4f8b\u5982\uff0c$100.00 ","Please select one of the above options.":"\u8acb\u5728\u4e0a\u9762\u9078\u64c7\u3002 ","Please select one of the options.":"\u8acb\u9078\u64c7\u3002 ","Please select State\/Province.":"\u8acb\u9078\u64c7\u7701\u4efd\u3002 ","Please enter valid password.":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u5bc6\u78bc\u3002 ","Please enter 6 or more characters. Leading or trailing spaces will be ignored.":"\u8acb\u8f38\u51656\u500b\u6216\u66f4\u591a\u5b57\u5143\uff0c\u524d\u5f8c\u7a7a\u683c\u5c07\u88ab\u5ffd\u7565\u3002 ","Please enter a number greater than 0 in this field.":"\u8acb\u5728\u8a72\u6b04\u8f38\u51650\u4ee5\u4e0a\u6578\u5b57\u3002 ","Please enter a valid credit card number.":"\u8acb\u8f38\u5165\u6b63\u78ba\u7684\u4fe1\u7528\u5361\u865f\u78bc\u3002 ","Please wait, loading...":"\u8acb\u7a0d\u5019\uff0c\u52a0\u8f09\u4e2d... ","Credit card number doesn't match credit card type":"Credit card number does not match credit card type","Please use only letters (a-z or A-Z), numbers (0-9) or underscore(_) in this field, first character should be a letter.":"Please use only letters (a-z or A-Z), numbers (0-9) or underscores (_) in this field, first character must be a letter.","Maximum length exceeded.":"\u8acb\u8f38\u5165\u5408\u9069\u9577\u5ea6\u3002","Invalid phone number.":"\u8acb\u8f38\u5165\u6b63\u78ba\u865f\u78bc\u3002","Your session has been expired, you will be relogged in now.":"\u60a8\u7684session\u8d85\u6642\uff0c\u73fe\u5728\u91cd\u5beb\u767b\u9304\u3002 ","Incorrect credit card expiration date":"\u4fe1\u7528\u5361\u5931\u6548\u65e5\u671f\u6709\u8aa4"});</script>
+    <div id="back-to-top" class="hidden"><a href="#" class="back-to-top" role="button"><span class="glyphicon glyphicon-chevron-up"></span></a></div>
+    <script>
+	jQuery(document).ready(function(){
+		jQuery(function(){
+			jQuery(document).on('scroll', function() {
+				if (jQuery(window).scrollTop() > 250) {
+					jQuery('#back-to-top').removeClass('hidden');
+				}
+				else {
+					jQuery('#back-to-top').addClass('hidden');
+				}
+			});
+		});
+	});
+</script>
+
+    <div style="display:none"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+    <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1009385120/?value=0&amp;label=ajNUCMCq-QMQoP2n4QM&amp;guid=ON&amp;script=0"/></div></noscript>
+
+    <!-- Begin Rapid Retargeter Tag -->
+    <iframe name="__bkframe" height="0" width="0" frameborder="0"
+            style="display:none;position:absolute;clip:rect(0px 0px 0px 0px)" src="about:blank"></iframe>
+
+
+    <!--ewpagecache:page_html_footer_begin:-->
+    <script type="text/javascript">
+    var custid = 'HK_114362';
+    var email = 'iamkcyiii@gmail.com';
+    var phone = '';
+
+    if (email || phone) {
+        BKTAG.util.normalizeEmail(email);
+        BKTAG.util.normalizeEmail(phone);
+        bk_addPageCtx('id', custid);
+        bk_doJSTag(37464, 1);
+    }
+
+    jQuery("#search_button").click(function(){
+        if (jQuery("#search").val()) {
+            bk_use_multiple_iframes = true;
+            bk_allow_multiple_calls = true;
+            bk_addPageCtx('Aid', '9316');
+            bk_addPageCtx('Etype', 'SEARCH');
+            bk_addPageCtx('Searchterm', jQuery("#search").val());
+            bk_addPageCtx('Utype', 'C');
+            bk_addPageCtx('Id', custid);
+            bk_doJSTag(37588, 1);
+            BKTAG._reset();
+        }
+    });
+
+    jQuery(".btn-checkout").click(function(){
+        bk_use_multiple_iframes = true;
+        bk_allow_multiple_calls = true;
+        bk_addPageCtx('Aid', '9316');
+        bk_addPageCtx('Etype', 'CART');
+        bk_addPageCtx('Action', 'PURCHASE');
+        //bk_addPageCtx('Pid', '');
+        bk_addPageCtx('Utype', 'C');
+        bk_addPageCtx('Id', custid);
+        bk_doJSTag(37588, 1);
+        BKTAG._reset();
+     });
+</script>
+
+    <script>
+    var mt_data = mt_data || [];
+            mt_data.push( ["uid","114362"] );
+
+</script>
+    <!--ewpagecache:page_html_mtdata_end--><script>
+    var mt_data = mt_data || [];
+    mt_data.push( ["click_tracking" , true] );
+    mt_data.push( ["click_tracking_listener" , function( event ){
+           switch( event.toElement.id ){
+               case "add_cart":
+                   mt.action( 'click' , 'add_to_cart' );
+                   event.mt_stop = true;
+                   break;
+           }
+        }]);
+
+</script>
+
+    <div data-role="footer">
+
+    </div>
+</div>
+</div>
+</body>
+</html>

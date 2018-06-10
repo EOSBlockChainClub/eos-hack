@@ -5,10 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="description" content="MyDress is a online shopping platform for Hong Kong girls. Over thousands of dresses, everyday new arrivals come and fast delivery is possible." />
 <meta name="keywords" content="Dress,online shopping,fashion,fast fashion,Korean fashion,Tokyo fashion,Cherrykoko,nissen" />
-<script type="text/javascript">
-    var BLANK_URL = 'https://www.mydress.com/js/blank.html';
-    var BLANK_IMG = 'https://www.mydress.com/js/spacer.gif';
-</script>
+
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.mydress.com/skin/frontend/default/rwd_mobile/js/jquery.mobile.1.4.5.custom.min.js"></script>
@@ -123,6 +120,10 @@ optionalZipCountries = ["MO","HK"];
 
   }
 
+  function displayThanks(){
+    document.getElementById('modal-detail').innerHTML = '<img src="ui/images/moneyhand.png" width="200px"/><p>Reward has been transferred to your RATEos Wallet!</p><p>Thanks for your valuable rating:)</p> <a href="rating.html">View the Product Ratings</a>';
+  }
+
   function makeReview() {
       var radios = document.getElementsByName('rate');
       var rating;
@@ -139,27 +140,27 @@ optionalZipCountries = ["MO","HK"];
       var comment =document.getElementById("comment").value;
 
       var json = JSON.stringify({
-        userid: "123",
-        productid: "456",
-        rating: rating,
-        comment: comment
-      })
+            userid: "123",
+            productid: "456",
+            rating: rating,
+            comment: comment
+      });
 
-        var xmlhttp = new XMLHttpRequest();
-        var url = "http://10.101.1.167:9001/makeReview";
 
-        xmlhttp.open("POST", url, true);
-        // xmlhttp.open("GET", "http://10.101.1.167:9001/get_info", true);
+              var xmlhttp = new XMLHttpRequest();
+              var url = "http://localhost:9001/makeReview";
 
-        xmlhttp.setRequestHeader("Content-Type", "application/json");
+              xmlhttp.open("POST", url, true);
 
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            }
-        };
-        xmlhttp.send(json);
-        // xmlhttp.send();
-        //MyFunction();
+              xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+
+              xmlhttp.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+                  }
+              };
+              xmlhttp.send(json);
+        displayThanks();
 
 
 
@@ -288,7 +289,7 @@ optionalZipCountries = ["MO","HK"];
   <div class="modal-content">
     <span class="closeBtn" onclick="closeModal();">&times;</span>
 
-    <div>
+    <div id="modal-detail">
     	<div>
     	    <h1 class="order-info">Order 300159040</h1>
 
@@ -342,57 +343,62 @@ optionalZipCountries = ["MO","HK"];
                            </div>
                            <div class="item-options small text-note mt-xs">
 
-                                <div class='mb-xs'>
-                                    <div style="padding-left:0.8em; padding-bottom: 0.2em;">
-                                        Product Id:
-                                        <span >
-                                         A1001-11-XL
-                                         </span>
-                                    </div>
-                       				<div style="padding-left:0.8em; padding-bottom: 0.2em;">
-                       						Color:
-                       						<span >
-                       							Blue
-                       						</span>
-                       				</div>
-                       				<div style="padding-left:0.8em; padding-bottom: 0.2em;">
-                       						Size:
-                       						<span >
-                       							M
-                       						</span>
-                       				</div>
+                                 <table>
+                                                                            <!--<div style="padding-left:0.8em; padding-bottom: 0.2em;">-->
+                                                                                <tr>
+                                                                                    <td  style="padding-left:1em;padding-bottom:0.5em";>Product Id:</td>
+                                                                                    <td  style="padding-left:1em;padding-bottom:0.5em";>A1001-11-XL</td>
+                                                                                </tr>
+                                                                             <!--</div>-->
+                                                            <!--<div style="padding-left:0.8em; padding-bottom: 0.2em;">-->
+                                                                                <tr><td  style="padding-left:1em;padding-bottom:0.5em";>Color:</td>
+                                                                                    <td  style="padding-left:1em;padding-bottom:0.5em";>Blue</td>
+                                                                                </tr>
+                                                                            <!--</div>-->
+                                                            <!--<div style="padding-left:0.8em; padding-bottom: 0.2em;">-->
+                                                                            <tr><td  style="padding-left:1em;padding-bottom:0.5em";>Size:</td>
+                                                                                <td  style="padding-left:1em;padding-bottom:0.5em";>
+                                                                                                    M
+                                                                                                </td>
+                                                                            </tr>
+                                                                            <!--</div>-->
+                                                                            <tr><td  style="padding-left:1em;padding-bottom:0.5em";>
+                                                <!--<div style="padding-left:0.8em; padding-bottom: 0.2em;">-->
+                                                                                Price:</td>
+                                                                                <td  style="padding-left:1em;padding-bottom:0.5em";>
+                                                                                                    HK$262.00
+                                                                                                </td>
+                                                                            </tr>
 
-                       				<div style="padding-left:0.8em; padding-bottom: 0.2em;">
-                                            Price:
-                                            <span >
-                                                HK$262.00
-                                            </span>
-                                    </div>
-                       			</div>
+                                                                            <tr><td  style="padding-left:1em;padding-bottom:0.5em";>
+                                                                                   Rating:</td>
+                                                                                <td  style="padding-left:1em;padding-bottom:0.5em";>
+                                                                                         <span >
+                                                                                                                                  <input type="radio" name="rate" value="1"> 1 (Lowest)
+                                                                                                                                  <input type="radio" name="rate" value="2"> 2
+                                                                                                                                  <input type="radio" name="rate" value="3"> 3
+                                                                                                                                  <input type="radio" name="rate" value="4"> 4
+                                                                                                                                  <input type="radio" name="rate" value="5"> 5 (Highest)
+                                                                                                                                   </span>
+                                                                                                              </td>
+                                                                            </tr>
 
-                       			<div class='mb-xs'>
-                       			    <div style="padding-left:0.8em;">
-                       			        Rating:
-                       			         <span >
-                                          <input type="radio" name="rate" value="1"> 1 (Lowest)
-                                          <input type="radio" name="rate" value="2"> 2
-                                          <input type="radio" name="rate" value="3"> 3
-                                          <input type="radio" name="rate" value="4"> 4
-                                          <input type="radio" name="rate" value="5"> 5 (Highest)
-                                           </span>
-                                    </div>
-                                    <div style="padding-left:0.8em;">
-                                           Comment:
-                                           <br/>
-                                           <span >
-                                            <textarea id="comment" rows="3" cols="50">
-                                            </textarea>
-                                           </span>
 
-                                    </div>
-                       			</div>
+                                                                            <tr><td  style="padding-left:1em;padding-bottom:0.5em";>
+                                                                                Comment:</td>
+                                                                             <td  style="padding-left:1em;padding-bottom:0.5em";>
+                                                                                                  <textarea id="comment" rows="3" cols="50">
+                                                                                                                                              </textarea>
+                                                                                             </td>
+                                                                              </tr>
+
+
+
+                                                                            </table>
+
+
                                 <div style="padding-left:0.5em;">
-                       			<a href="#" onclick="makeReview();"><img src="ui/images/submit.jpg" width="80px"/></a>
+                       			<a href="#" onclick="makeReview();"><img src="ui/images/submit.jpeg" width="180px"/></a>
                                 </div>
                            </div>
                        	</td>
@@ -508,6 +514,7 @@ optionalZipCountries = ["MO","HK"];
 <li><a href="/brand/clicknfunny?src=menu">CLICK&amp;FUNNY</a></li>
 <li><a href="/brand/dailylook?src=menu">DAILYLOOK</a></li>
 <li><a href="/brand/icecream12?src=menu">ICECREAM12</a></li>
+<li><a href="/brand/icecream12?src=menu">ICECREAM12</a></li>
 <li><a href="/brand/justone?src=menu">JUSTONE</a></li>
 <li><a href="/brand/masandchris?src=menu">MASANDCHRIS</a></li>
 </ul>
@@ -611,7 +618,7 @@ optionalZipCountries = ["MO","HK"];
 <li><a href="/brand/i_m_meme-pony_x_memebox?src=menu">I'M MEME</a></li>
 <li><a href="/brand/faith_in_face?src=menu">Faith in Face</a></li>
 <li><a href="/brand/missha?src=menu">Missha</a></li>
-<li><a href="/brand/bbia?src=menu">BbiA<a></li>
+<li><a href="/brand/bbia?src=menu">BbiA</a></li>
 <li><a href="/brand/rire?src=menu">RiRe</a></li>
 <li><a href="/brand/aritaum?src=menu">Aritaum</a></li>
 <li><a href="/brand/veet?src=menu">Veet</a></li>
@@ -872,7 +879,7 @@ optionalZipCountries = ["MO","HK"];
 <div class="mb"><strong>Contact Us</strong></div>
 <h3 class="mb-sm">2180 7474</h3>
 <h3 class="mb-sm"><a href="mailto:cs@mydress.com">cs@mydress.com</a></h3>
-<div>Office Hour:<br />Mon to Fri 10:00-13:00及<br />14:00-19:00<br />Other days: off</div>
+<div>Office Hour:<br />Mon to Fri 10:00-13:00 and<br />14:00-19:00<br />Other days: off</div>
 </div>
 </div>
 <div class="mb-lg mt-lg text-center"><img style="padding-right: 20px;" src="https://www.mydress.com/skin/frontend/default/rwd_mobile/images/cc201718.png" alt="" height="60" /> <img src="https://www.mydress.com/skin/frontend/default/rwd_mobile/images/hkrma201718.png" alt="" height="60" /></div>
